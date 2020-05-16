@@ -1,0 +1,95 @@
+#include <iostream>
+#include <cstring>
+
+class Animal {
+    protected:
+        char *nume;
+    public:
+        Animal(char* nume) {
+            this->nume = new char[strlen(nume)+1];
+            strcpy(this->nume, nume);
+
+        }
+        Animal(const Animal &ob) {
+            this->nume = new char[strlen(ob.nume)+1];
+            strcpy(this->nume, ob.nume);
+        }
+        ~Animal() {
+            delete[] nume;
+        }
+        Animal &operator = (const Animal &ob) {
+            if(this!=&ob) {
+                delete[] nume;
+                this->nume = new char[strlen(ob.nume)+1];
+                strcpy(this->nume, ob.nume);
+            }
+        }
+        void print() {
+            std::cout << "Liliacul: " << nume <<"\n";
+        }
+};
+class Mamifer : virtual public Animal {
+    protected:
+        int perioadaGestatie;
+    public:
+        Mamifer(char* nume, int perioadaGestatie) :Animal(nume) {
+            this->perioadaGestatie = perioadaGestatie;
+        }
+        Mamifer(const Mamifer &ob):Animal(ob) {
+            this->perioadaGestatie = ob.perioadaGestatie;
+        }
+        Mamifer & operator = (const Mamifer &ob) {
+            if(this!=&ob) {
+                this->perioadaGestatie = ob.perioadaGestatie;
+Animal::operator=(ob);
+            }
+return *this;
+        }
+        void print() {
+            std::cout << "Gestatie de: " << perioadaGestatie <<" luni"<<"\n";
+        }
+};
+class AnimalZburator : virtual public Animal {
+    protected:
+        int altitudineZbor;
+    public:
+        AnimalZburator(char* nume, int altitudineZbor) :Animal(nume) {
+              this->altitudineZbor = altitudineZbor;
+        }
+        AnimalZburator(const AnimalZburator &ob):Animal(ob) {
+            this->altitudineZbor = ob.altitudineZbor;
+        }
+        AnimalZburator & operator = (const AnimalZburator &ob) {
+            if(this!=&ob) {
+                this->altitudineZbor = ob.altitudineZbor;
+Animal::operator=(ob);
+            }
+return *this;
+        }
+        void print() {
+            std::cout << "Altitudine zbor: " << altitudineZbor << "\n\n";
+        }
+};
+class Liliac : public Mamifer, public AnimalZburator {
+    public:
+        Liliac(char* nume, int perioadaGestatie, int altitudineZbor) : AnimalZburator(nume, altitudineZbor), Mamifer(nume, perioadaGestatie), Animal(nume) {
+        }
+        Liliac(const Liliac &ob):AnimalZburator(ob), Mamifer(ob), Animal(ob) {
+        }
+        Liliac &operator = (const Liliac &ob) {
+            AnimalZburator::operator = (ob);
+            Mamifer::operator = (ob);
+            Animal::operator = (ob);
+            return *this;
+        }
+        void print() {
+            Animal::print();
+            Mamifer::print();
+            AnimalZburator::print();
+        }
+};
+int main() {
+    Liliac L("Napoleon", 5, 8000);
+    L.print();
+    system("pause");
+}
