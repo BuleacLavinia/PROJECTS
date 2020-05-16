@@ -25,7 +25,7 @@ int main() {
 	for(int i=0; i<k; i++)
 		if(t[i])
 			cout<<t[i];
-		else
+		else 
 			cout<<"(oops, error)";
 	cout<<"\n\n\n";
 }
