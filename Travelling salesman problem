@@ -1,0 +1,290 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#include <iostream>
+
+#define MILION 1000000
+#define LIM 5000
+#define N 20
+
+using namespace std;
+
+string orase[]= {"Bucuresti", "SatuMare", "BaiaMare", "Oradea", "Arad", "Timisoara", "AlbaIulia", "ClujNapoca", "Bistrita", "TarguMures", "Sibiu", "Brasov", "Pitesti", "Craiova", "Suceava", "PiatraNeamt", "Iasi", "Braila", "Tulcea", "Constanta"};
+int a[N][N];
+
+void initializare(int &n, int d[]) {
+    int aux, M[N];
+    n=0;
+    for(int i=1; i<=N; i++)
+        M[i]=i;
+    int k=N; //k e lungimea lui M
+    while(k!=0) {
+        aux= rand()%k+1;
+        d[++n]=M[aux];
+        for(int j=aux; j<k; j++)
+            M[j]=M[j+1];
+        k--;
+    }
+}
+
+int evaluare(int d[], int a[][N]) {
+    int dist = 0;
+    for (int i = 1; i < N; i++)
+        dist+=a[d[i]][d[i+1]];
+    dist+=a[d[N]][d[1]];
+    return dist;
+}
+
+void variatie(int &n, int d[], float pm) {
+    int x,aux;
+    float p;
+    srand(time(NULL));
+    for(int j=1; j<=n; j++) {
+        p=(float)(rand()%10)/10; //nr random in 0-10, apoi impart la 10 si mi va da nr cu zecimala
+        if(p<pm) {
+            x=rand()%n;
+            while(x==j)
+                x=rand()%n;
+            aux=d[x];
+            d[x]=d[j];
+            d[j]=aux;
+        }
+    }
+}
+
+int main() {
+    a[1][2]=596;
+    a[1][3]=550;
+    a[1][4]=574;
+    a[1][5]=555;
+    a[1][6]=538;
+    a[1][7]=394;
+    a[1][8]=426;
+    a[1][9]=419;
+    a[1][10]=330;
+    a[1][11]=282;
+    a[1][12]=161;
+    a[1][13]=126;
+    a[1][14]=248;
+    a[1][15]=436;
+    a[1][16]=349;
+    a[1][17]=406;
+    a[1][18]=213;
+    a[1][19]=278;
+    a[1][20]=225;
+    a[2][3]=67;
+    a[2][4]=135;
+    a[2][5]=250;
+    a[2][6]=304;
+    a[2][7]=331;
+    a[2][8]=170;
+    a[2][9]=216;
+    a[2][10]=271;
+    a[2][11]=333;
+    a[2][12]=434;
+    a[2][13]=485;
+    a[2][14]=544;
+    a[2][15]=369;
+    a[2][16]=429;
+    a[2][17]=463;
+    a[2][18]=660;
+    a[2][19]=752;
+    a[2][20]=815;
+    a[3][4]=183;
+    a[3][5]=298;
+    a[3][6]=352;
+    a[3][7]=303;
+    a[3][8]=146;
+    a[3][9]=148;
+    a[3][10]=219;
+    a[3][11]=305;
+    a[3][12]=388;
+    a[3][13]=457;
+    a[3][14]=516;
+    a[3][15]=326;
+    a[3][16]=387;
+    a[3][17]=420;
+    a[3][18]=618;
+    a[3][19]=710;
+    a[3][20]=768;
+    a[4][5]=115;
+    a[4][6]=169;
+    a[4][7]=278;
+    a[4][8]=147;
+    a[4][9]=263;
+    a[4][10]=249;
+    a[4][11]=311;
+    a[4][12]=412;
+    a[4][13]=463;
+    a[4][14]=463;
+    a[4][15]=478;
+    a[4][16]=444;
+    a[4][17]=538;
+    a[4][18]=671;
+    a[4][19]=763;
+    a[4][20]=792;
+    a[5][6]=52;
+    a[5][7]=239;
+    a[5][8]=263;
+    a[5][9]=378;
+    a[5][10]=350;
+    a[5][11]=273;
+    a[5][12]=415;
+    a[5][13]=429;
+    a[5][14]=394;
+    a[5][15]=593;
+    a[5][16]=531;
+    a[5][17]=646;
+    a[5][18]=674;
+    a[5][19]=766;
+    a[5][20]=780;
+    a[6][7]=217;
+    a[6][8]=316;
+    a[6][9]=417;
+    a[6][10]=327;
+    a[6][11]=256;
+    a[6][12]=399;
+    a[6][13]=406;
+    a[6][14]=353;
+    a[6][15]=575;
+    a[6][16]=509;
+    a[6][17]=691;
+    a[6][18]=651;
+    a[6][19]=743;
+    a[6][20]=758;
+    a[7][8]=160;
+    a[7][9]=200;
+    a[7][10]=116;
+    a[7][11]=113;
+    a[7][12]=232;
+    a[7][13]=268;
+    a[7][14]=293;
+    a[7][15]=358;
+    a[7][16]=292;
+    a[7][17]=407;
+    a[7][18]=490;
+    a[7][19]=583;
+    a[7][20]=612;
+    a[8][9]=119;
+    a[8][10]=101;
+    a[8][11]=163;
+    a[8][12]=264;
+    a[8][13]=315;
+    a[8][14]=374;
+    a[8][15]=334;
+    a[8][16]=297;
+    a[8][17]=390;
+    a[8][18]=523;
+    a[8][19]=615;
+    a[8][20]=644;
+    a[9][10]=89;
+    a[9][11]=200;
+    a[9][12]=257;
+    a[9][13]=352;
+    a[9][14]=411;
+    a[9][15]=214;
+    a[9][16]=247;
+    a[9][17]=308;
+    a[9][18]=486;
+    a[9][19]=578;
+    a[9][20]=638;
+    a[10][11]=112;
+    a[10][12]=168;
+    a[10][13]=262;
+    a[10][14]=321;
+    a[10][15]=261;
+    a[10][16]=195;
+    a[10][17]=310;
+    a[10][18]=426;
+    a[10][19]=519;
+    a[10][20]=548;
+    a[11][12]=142;
+    a[11][13]=155;
+    a[11][14]=236;
+    a[11][15]=358;
+    a[11][16]=289;
+    a[11][17]=441;
+    a[11][18]=401;
+    a[11][19]=493;
+    a[11][20]=507;
+    a[12][13]=149;
+    a[12][14]=205;
+    a[12][15]=319;
+    a[12][16]=228;
+    a[12][17]=299;
+    a[12][18]=258;
+    a[12][19]=350;
+    a[12][20]=380;
+    a[13][14]=123;
+    a[13][15]=468;
+    a[13][16]=378;
+    a[13][17]=448;
+    a[13][18]=318;
+    a[13][19]=404;
+    a[13][20]=351;
+    a[14][15]=524;
+    a[14][16]=434;
+    a[14][17]=504;
+    a[14][18]=434;
+    a[14][19]=504;
+    a[14][20]=451;
+    a[15][16]=122;
+    a[15][17]=144;
+    a[15][18]=341;
+    a[15][19]=433;
+    a[15][20]=520;
+    a[16][17]=131;
+    a[16][18]=254;
+    a[16][19]=346;
+    a[16][20]=432;
+    a[17][18]=271;
+    a[17][19]=364;
+    a[17][20]=434;
+    a[18][19]=92;
+    a[18][20]=178;
+    a[19][20]=124;
+    for(int i=1; i<=N; i++)
+        for(int j=1; j<=N; j++)
+            a[j][i]=a[i][j]; //dau km si in sens invers
+    srand(time(NULL));
+    int dist=0;
+    float pm=(float)(rand()%10)/10; //initializez pm
+    int orasenr[N], n=N;
+    for(int i=1; i<=N; i++)
+        orasenr[i]=i;
+    int eval_curent, d1[N]; //eval_curent si configuratie1
+    for(int i=1; i<=N; i++)
+        d1[i]=i;
+    initializare(n,orasenr);
+    clock_t T;
+    T = clock();
+    int kontor=0, proba=0;
+    double timp = ((double)T)/CLOCKS_PER_SEC;
+    eval_curent=evaluare(d1, a);
+    while((eval_curent>evaluare(orasenr,a))&&(kontor<MILION)&&(timp<3)&&(evaluare(d1,a)<LIM)) {
+        eval_curent=evaluare(orasenr, a); //retin evaluarea curenta
+        for(int t=1; t<=50; t++) {
+            for(int i=1; i<=N; i++)  //copiez config in config1
+                d1[i]=orasenr[i];
+            variatie(n,d1,pm); //ca sa i pot da variatie
+            eval_curent=evaluare(d1, a);
+            kontor++;
+        }
+        for(int i=1; i<=N; i++)
+            orasenr[i]=d1[i];
+        variatie(n,orasenr,pm);
+        timp = ((double)T)/CLOCKS_PER_SEC;
+        proba++;
+    }
+    cout<<"Solutia:"<<endl<<endl<<endl;
+    for(int i=1; i<=N; i++)
+        cout<<orase[orasenr[i]]<<" ";  //afisez configuratia
+    cout<<endl<<endl<<endl<<"Evaluarea este: "<<endl<<eval_curent;
+    return 0;
+}
+
+
+
+
