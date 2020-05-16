@@ -1,0 +1,173 @@
+#include <cstring>
+#include <iostream>
+
+using namespace std;
+
+class Revista {
+        char Titlu[50];
+        int cota;
+    public:
+        Revista(int cota, char Titlu[]);
+        void setTitlu(char Titlu[]);
+        char getTitlu(char Titlu[]);
+        void setCota(int cota);
+        char getCota(int cota);
+        friend ostream & operator << (ostream &out, Revista &r);
+};
+
+Revista:: Revista(int cota, char Titlu[]) {
+    strcpy(this->Titlu, Titlu);
+    this->cota=cota;
+}
+
+void Revista::setTitlu(char Titlu[]) {
+    strcpy(this->Titlu, Titlu);
+}
+
+char Revista::getTitlu(char Titlu[]) {
+    return Titlu;
+}
+
+void Revista::setCota(int cota) {
+    this->cota = cota;
+}
+
+int Revista::getCota(int cota) {
+    return cota;
+}
+
+ostream & operator << (ostream &out, Revista &r) {
+    out<<r.titlu<<", "<<r.cota<<")";
+    return out;
+}
+
+class CD {
+        char Titlu[50];
+        int cota;
+    public:
+        CD(int cota, char Titlu[]);
+        void setTitlu(char Titlu[]);
+        char getTitlu(char Titlu[]);
+        void setCota(int cota);
+        char getCota(int cota);
+};
+
+CD:: CD(int cota, char Titlu[]) {
+    strcpy(this->Titlu, Titlu);
+    this->cota=cota;
+}
+
+void CD::setTitlu(char Titlu[]) {
+    strcpy(this->Titlu, Titlu);
+}
+
+char CD::getTitlu(char Titlu[]) {
+    return Titlu;
+}
+
+void CD::setCota(int cota) {
+    this->cota = cota;
+}
+
+int CD::getCota(int cota) {
+    return cota;
+}
+
+ostream & operator << (ostream &out, CD &c) {
+    out<<c.titlu<<", "<<c.cota<<")";
+    return out;
+}
+
+class Carte {
+        char Titlu[50];
+        int cota;
+    public:
+        Carte(int cota, char Titlu[]);
+        void setTitlu(char Titlu[]);
+        char getTitlu(char Titlu[]);
+        void setCota(int cota);
+        char getCota(int cota);
+};
+
+Carte:: Carte(int cota, char Titlu[]) {
+    strcpy(this->Titlu, Titlu);
+    this->cota=cota;
+}
+
+void Carte::setTitlu(char Titlu[]) {
+    strcpy(this->Titlu, Titlu);
+}
+
+char Carte::getTitlu(char Titlu[]) {
+    return Titlu;
+}
+
+void Carte::setCota(int cota) {
+    this->cota = cota;
+}
+
+int Carte::getCota(int cota) {
+    return cota;
+}
+
+ostream & operator << (ostream &out, Carte &ca) {
+    out<<ca.titlu<<", "<<ca.cota<<")";
+    return out;
+}
+
+class Inventar {
+    public:
+        virtual void print();
+        virtual ~Inventar();
+};
+
+void Inventar::print() {
+    cout<<"Inventar"<<endl;
+}
+Inventar::~Inventar() {
+    cout<<"Apel destructor Inventar"<<endl;
+}
+
+class Biblioteca {
+        Inventar **pFiguri;
+        int nrObiecte;
+    public:
+        Biblioteca(int n, Inventar *f[]);
+        Biblioteca(const Biblioteca &Biblioteca);
+        ~Biblioteca();
+        void print();
+};
+
+Biblioteca::Biblioteca(int n, Inventar *f[]) {
+    nrObiecte=n;
+    pObiecte = new Inventar*[nrObiecte];
+    for(int i=0; i<nrObiecte; i++) {
+        pObiecte[i] = f[i];
+    }
+}
+
+Biblioteca::Biblioteca(const Biblioteca &Biblioteca) {
+    nrObiecte=Biblioteca.nrObiecte;
+    pObiecte = new Inventar*[nrObiecte];
+    for(int i=0; i<nrObiecte; i++) {
+        pObiecte[i] = Biblioteca.pObiecte[i];
+    }
+}
+Biblioteca::~Biblioteca() {
+    if (pObiecte != 0) {
+        delete pObiecte;
+        pObiecte = 0;
+    }
+}
+
+void Biblioteca::print() {
+    cout<<"Biblioteca:"<<endl;
+    for(int i=0; i<nrObiecte; i++) {
+        if (pObiecte[i]!=0) {
+            pObiecte[i]->print();
+        }
+    }
+}
+int main() {
+    CD c(245,"Metallica");
+}
