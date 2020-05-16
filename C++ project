@@ -1,0 +1,85 @@
+#include<iostream>
+#include<cstring>
+
+using namespace std;
+
+class Jucator {
+    private:
+        int nr;
+        char name[50];
+    public:
+        Jucator(int nr, char name[50]) {
+            this->nr=nr;
+            strcpy(this->name,name);
+        }
+        int getNr();
+        char getName();
+        void setNr(int nr);
+        void setName(char name[50]);
+};
+int Jucator::getNr() {
+    return nr;
+}
+void Jucator::setNr(int nr) {
+    this->nr=nr;
+}
+char Jucator::getName() {
+    return name;
+}
+void Jucator::setName(char name[50]) {
+    strcpy(this->name,name);
+}
+
+class Antrenor {
+    private:
+        int salariu;
+        char nume[50];
+    public:
+        Antrenor(char nume[50], int salariu) {
+            this->salariu=salariu;
+            strcpy(this->nume,nume);
+        }
+        int getSalariu();
+        char getNume();
+        void setSalariu(int salariu);
+        void setNume(char name[50]);
+};
+int Antrenor::getSalariu() {
+    return salariu;
+}
+void Antrenor::setSalariu(int salariu) {
+    this->salariu=salariu;
+}
+char Antrenor::getNume() {
+    return nume;
+}
+void Antrenor::setNume(char nume[50]) {
+    strcpy(this->nume,nume);
+}
+
+class Echipa {
+    private:
+        Antrenor X;
+        Jucator Y[10];
+    public:
+        Echipa(Antrenor X, Jucator Y[10]) {
+            this->X=X;
+            for(int i=0; i<10; i++)
+                this->Y[i]=Y[i];
+        }
+        void afisare();
+};
+
+void Echipa::afisare() {
+    cout<<"Echipa dvs este compusa din: ";
+    cout<<endl<<"Antrenor: "<<X.nume<<endl<<"Jucator: ";
+    for(int i=0; i<10; i++)
+        cout<<"Jucatorul nr "<<Y[i].nr<<",  "<<Y[i].nume<<endl;
+}
+
+int main() {
+    Jucator Y[10];
+    Antrenor X;
+    Y[0].nr=5;
+    return 0;
+}
