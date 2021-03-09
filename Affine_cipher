@@ -1,0 +1,27 @@
+#include<iostream>
+#include<cstring>
+
+using namespace std;
+
+char s[2500];
+int n,A,B,C;
+
+int main() {
+	cout<<"Welcome!\nThis app will encrypt your text, according to the affine encryption method.\n";
+	cout<<"\n\nFirstly, the text must have maximum 2500 characters!\n";
+	cin.getline(s,2500);
+	cout<<"\nNow, we kindly ask you to give us n for encryption(A*n+B)%C: ";
+	cin>>n;
+	cout<<"\nNow, we kindly ask you to give us A: ";
+	cin>>A;
+	cout<<"\nNow, we kindly ask you to give us B: ";
+	cin>>B;
+	cout<<"\nNow, we kindly ask you to give us C: ";
+	cin>>C;
+	for(int i=0; i<strlen(s); i++)
+		s[i]=s[i]+(A*n+B)%C;
+	cout<<"We have succesfully encrypted your text. Here it is: \n";
+	cout<<s;
+	cout<<"\n";
+	system("pause");
+}
